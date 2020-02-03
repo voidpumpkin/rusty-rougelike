@@ -1,9 +1,11 @@
-use crate::components::{LeftMover, Player, Position, Renderable};
-use crate::state::State;
+use crate::{
+    components::{Player, Position, Renderable},
+    State,
+};
 use rltk::RGB;
 use specs::prelude::{Builder, WorldExt};
 
-fn spawn_player(gs: &mut State) {
+fn draw_player(gs: &mut State) {
     gs.ecs
         .create_entity()
         .with(Position { x: 40, y: 25 })
@@ -15,7 +17,7 @@ fn spawn_player(gs: &mut State) {
         .with(Player {})
         .build();
 }
-fn sapwn_enemies(gs: &mut State) {
+fn _draw_enemies(gs: &mut State) {
     for i in 0..10 {
         gs.ecs
             .create_entity()
@@ -25,11 +27,10 @@ fn sapwn_enemies(gs: &mut State) {
                 fg: RGB::named(rltk::RED),
                 bg: RGB::named(rltk::BLACK),
             })
-            .with(LeftMover {})
             .build();
     }
 }
-pub fn run_spawners(gs: &mut State) {
-    spawn_player(gs);
-    sapwn_enemies(gs);
+pub fn draw(gs: &mut State) {
+    draw_player(gs);
+    // draw_enemies(gs);
 }
