@@ -2,7 +2,7 @@ use crate::{
     components::{Position, Renderable},
     draw_map, player_input, TileType,
 };
-use rltk::{Console, GameState, Rltk};
+use rltk::{GameState, Rltk};
 use specs::prelude::{Join, World, WorldExt};
 
 pub struct State {

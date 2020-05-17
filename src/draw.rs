@@ -5,10 +5,10 @@ use crate::{
 use rltk::RGB;
 use specs::prelude::{Builder, WorldExt};
 
-fn draw_player(gs: &mut State) {
+fn draw_player(gs: &mut State, init_position: Position) {
     gs.ecs
         .create_entity()
-        .with(Position { x: 40, y: 25 })
+        .with(init_position)
         .with(Renderable {
             glyph: rltk::to_cp437('@'),
             fg: RGB::named(rltk::YELLOW),
@@ -30,7 +30,7 @@ fn _draw_enemies(gs: &mut State) {
             .build();
     }
 }
-pub fn draw(gs: &mut State) {
-    draw_player(gs);
+pub fn draw(gs: &mut State, init_player_position: Position) {
+    draw_player(gs, init_player_position);
     // draw_enemies(gs);
 }
