@@ -3,7 +3,10 @@ use crate::{
     Map,
 };
 use rltk::{field_of_view, Point};
-use specs::prelude::*;
+use specs::{
+    prelude::{Entities, ReadStorage, System, WriteExpect, WriteStorage},
+    Join,
+};
 
 pub struct VisibilitySystem {}
 
