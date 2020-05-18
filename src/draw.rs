@@ -1,6 +1,6 @@
 use crate::{
     components::{Player, Position, Renderable},
-    State,
+    State, Viewshed,
 };
 use rltk::RGB;
 use specs::prelude::{Builder, WorldExt};
@@ -15,6 +15,11 @@ fn draw_player(gs: &mut State, init_position: Position) {
             bg: RGB::named(rltk::BLACK),
         })
         .with(Player {})
+        .with(Viewshed {
+            visible_tiles: Vec::new(),
+            range: 8,
+            dirty: true,
+        })
         .build();
 }
 fn _draw_enemies(gs: &mut State) {
