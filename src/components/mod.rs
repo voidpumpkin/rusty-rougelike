@@ -1,13 +1,21 @@
+mod blocks_tile;
+mod combat_stats;
 mod monster;
 mod name;
 mod player;
 mod position;
 mod renderable;
+mod suffer_damage;
 mod viewshed;
+mod wants_to_melee;
 
+pub use blocks_tile::BlocksTile;
+pub use combat_stats::CombatStats;
 pub use monster::Monster;
 pub use name::Name;
 pub use player::Player;
 pub use position::Position;
 pub use renderable::Renderable;
+pub use suffer_damage::SufferDamage;
 pub use viewshed::Viewshed;
+pub use wants_to_melee::WantsToMelee;

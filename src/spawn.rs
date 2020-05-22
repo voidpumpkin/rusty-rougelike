@@ -1,13 +1,17 @@
 use crate::{
-    components::{Monster, Name, Player, Position, Renderable, Viewshed},
+    components::{BlocksTile, CombatStats, Monster, Name, Player, Position, Renderable, Viewshed},
     Map, State,
 };
 use rltk::RGB;
-use specs::prelude::{Builder, WorldExt};
+use specs::{
+    prelude::{Builder, WorldExt},
+    Entity,
+};
 
-fn spawn_player(gs: &mut State, map: &Map) {
+fn spawn_player(gs: &mut State, map: &Map) -> Entity {
     let (player_x, player_y) = map.rooms[0].center();
-    gs.ecs
+    let player_entity = gs
+        .ecs
         .create_entity()
         .with(Position {
             x: player_x,
@@ -27,7 +31,14 @@ fn spawn_player(gs: &mut State, map: &Map) {
         .with(Name {
             name: "Player".to_string(),
         })
+        .with(CombatStats {
+            max_hp: 30,
+            hp: 30,
+            defense: 2,
+            power: 5,
+        })
         .build();
+    player_entity
 }
 fn spawn_enemies(gs: &mut State, map: &Map) {
     let mut rng = rltk::RandomNumberGenerator::new();
@@ -65,10 +76,18 @@ fn spawn_enemies(gs: &mut State, map: &Map) {
             .with(Name {
                 name: format!("{} #{}", &name, i),
             })
+            .with(BlocksTile {})
+            .with(CombatStats {
+                max_hp: 16,
+                hp: 16,
+                defense: 1,
+                power: 4,
+            })
             .build();
     }
 }
-pub fn spawn(gs: &mut State, map: &Map) {
-    spawn_player(gs, map);
+pub fn spawn(gs: &mut State, map: &Map) -> (Entity,) {
+    let player_entity = spawn_player(gs, map);
     spawn_enemies(gs, map);
+    (player_entity,)
 }
