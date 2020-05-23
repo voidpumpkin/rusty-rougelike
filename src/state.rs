@@ -1,6 +1,8 @@
 use crate::{
     components::{Position, Renderable},
-    draw_map, player_input,
+    gui::draw_ui,
+    map::draw_map,
+    player::player_input,
     systems::{
         damage_system, DamageSystem, MapIndexingSystem, MeleeCombatSystem, MonsterAI,
         VisibilitySystem,
@@ -72,6 +74,7 @@ impl GameState for State {
         damage_system::delete_dead_entities(&mut self.ecs);
 
         draw_map(&self.ecs, ctx);
+        draw_ui(&self.ecs, ctx);
 
         let positions = self.ecs.read_storage::<Position>();
         let renderables = self.ecs.read_storage::<Renderable>();

@@ -1,4 +1,6 @@
 mod components;
+mod gamelog;
+mod gui;
 mod map;
 mod player;
 mod rect;
@@ -7,13 +9,11 @@ mod spawn;
 mod state;
 mod systems;
 
-use map::{draw_map, Map};
-use player::player_input;
-use rect::Rect;
+use map::Map;
 use register_components::register_components;
 use rltk::{Point, RltkBuilder, RltkError};
 use spawn::spawn;
-use specs::prelude::{World, WorldExt};
+use specs::{World, WorldExt};
 use state::{RunState, State};
 
 fn main() -> RltkError {
@@ -29,5 +29,8 @@ fn main() -> RltkError {
     gs.ecs.insert(map);
     gs.ecs.insert(player_entity);
     gs.ecs.insert(RunState::PreRun);
+    gs.ecs.insert(gamelog::GameLog {
+        entries: vec!["Welcome to Rusty Roguelike".to_string()],
+    });
     rltk::main_loop(context, gs)
 }
