@@ -14,4 +14,4 @@ specs-derive = "0.4.1"
 [dependencies.specs]
 version = "0.16.1"
 default-features = false
-features = ['serde']
+features = ['serde','specs-derive']

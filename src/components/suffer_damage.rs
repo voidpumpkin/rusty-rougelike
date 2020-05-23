@@ -1,5 +1,4 @@
 use specs::{Component, DenseVecStorage, Entity, WriteStorage};
-use specs_derive::Component;
 #[derive(Component, Debug)]
 pub struct SufferDamage {
     pub amount: Vec<i32>,

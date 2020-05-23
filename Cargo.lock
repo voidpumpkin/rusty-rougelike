@@ -1454,6 +1454,7 @@ dependencies = [
  "serde",
  "shred",
  "shrev",
+ "specs-derive",
  "tuple_utils",
 ]
 

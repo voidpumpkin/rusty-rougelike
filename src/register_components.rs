@@ -1,7 +1,8 @@
 use crate::{
     components::{
-        BlocksTile, CombatStats, Monster, Name, Player, Position, Renderable, SufferDamage,
-        Viewshed, WantsToMelee,
+        BlocksTile, CombatStats, InBackpack, Item, Monster, Name, Player, Position, Potion,
+        Renderable, SufferDamage, Viewshed, WantsToDrinkPotion, WantsToDropItem, WantsToMelee,
+        WantsToPickupItem,
     },
     state::State,
 };
@@ -18,4 +19,10 @@ pub fn register_components(gs: &mut State) {
     gs.ecs.register::<CombatStats>();
     gs.ecs.register::<WantsToMelee>();
     gs.ecs.register::<SufferDamage>();
+    gs.ecs.register::<Item>();
+    gs.ecs.register::<Potion>();
+    gs.ecs.register::<InBackpack>();
+    gs.ecs.register::<WantsToPickupItem>();
+    gs.ecs.register::<WantsToDrinkPotion>();
+    gs.ecs.register::<WantsToDropItem>();
 }

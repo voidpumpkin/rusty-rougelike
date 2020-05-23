@@ -1,5 +1,6 @@
 use crate::{
     components::{CombatStats, Player, Position, Viewshed, WantsToMelee},
+    get_item::get_item,
     Map, RunState, State,
 };
 use rltk::{Point, Rltk, VirtualKeyCode};
@@ -59,30 +60,35 @@ pub fn player_input(gs: &mut State, ctx: &mut Rltk) -> RunState {
     match ctx.key {
         None => return RunState::AwaitingInput, // Nothing happened
         Some(key) => match key {
-            VirtualKeyCode::Left | VirtualKeyCode::Numpad4 | VirtualKeyCode::H => {
+            VirtualKeyCode::F => get_item(&mut gs.ecs),
+            VirtualKeyCode::I => return RunState::ShowInventory,
+            VirtualKeyCode::G => return RunState::ShowDropItem,
+
+            //Move lines
+            VirtualKeyCode::Left | VirtualKeyCode::Numpad4 | VirtualKeyCode::A => {
                 try_move_player(-1, 0, &mut gs.ecs)
             }
 
-            VirtualKeyCode::Right | VirtualKeyCode::Numpad6 | VirtualKeyCode::L => {
+            VirtualKeyCode::Right | VirtualKeyCode::Numpad6 | VirtualKeyCode::D => {
                 try_move_player(1, 0, &mut gs.ecs)
             }
 
-            VirtualKeyCode::Up | VirtualKeyCode::Numpad8 | VirtualKeyCode::K => {
+            VirtualKeyCode::Up | VirtualKeyCode::Numpad8 | VirtualKeyCode::W => {
                 try_move_player(0, -1, &mut gs.ecs)
             }
 
-            VirtualKeyCode::Down | VirtualKeyCode::Numpad2 | VirtualKeyCode::J => {
+            VirtualKeyCode::Down | VirtualKeyCode::Numpad2 | VirtualKeyCode::S => {
                 try_move_player(0, 1, &mut gs.ecs)
             }
 
-            // Diagonals
-            VirtualKeyCode::Numpad9 | VirtualKeyCode::Y => try_move_player(1, -1, &mut gs.ecs),
+            //Move Diagonals
+            VirtualKeyCode::Numpad9 | VirtualKeyCode::E => try_move_player(1, -1, &mut gs.ecs),
 
-            VirtualKeyCode::Numpad7 | VirtualKeyCode::U => try_move_player(-1, -1, &mut gs.ecs),
+            VirtualKeyCode::Numpad7 | VirtualKeyCode::Q => try_move_player(-1, -1, &mut gs.ecs),
 
-            VirtualKeyCode::Numpad3 | VirtualKeyCode::N => try_move_player(1, 1, &mut gs.ecs),
+            VirtualKeyCode::Numpad3 | VirtualKeyCode::C => try_move_player(1, 1, &mut gs.ecs),
 
-            VirtualKeyCode::Numpad1 | VirtualKeyCode::B => try_move_player(-1, 1, &mut gs.ecs),
+            VirtualKeyCode::Numpad1 | VirtualKeyCode::Z => try_move_player(-1, 1, &mut gs.ecs),
 
             _ => return RunState::AwaitingInput,
         },

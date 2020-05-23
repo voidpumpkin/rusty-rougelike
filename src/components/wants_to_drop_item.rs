@@ -6,6 +6,6 @@ use specs::{
 };
 
 #[derive(Component, Debug, ConvertSaveload, Clone)]
-pub struct WantsToMelee {
-    pub target: Entity,
+pub struct WantsToDropItem {
+    pub item: Entity,
 }
