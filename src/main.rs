@@ -17,7 +17,7 @@ use rltk::{main_loop, Point, RandomNumberGenerator, RltkBuilder, RltkError};
 use spawn::spawn;
 use specs::{World, WorldExt};
 use state::{RunState, State};
-
+/// Hello bob
 fn main() -> RltkError {
     let context = RltkBuilder::simple80x50()
         .with_title("Roguelike Tutorial")
